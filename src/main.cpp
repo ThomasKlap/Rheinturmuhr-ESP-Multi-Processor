@@ -1,5 +1,10 @@
 #include "main.h" // move all definitions to separate header-include
 
+#define PROGRAM_VERSION "v7.1.0"
+#define BUILD_DATE __DATE__ " " __TIME__
+
+
+
 void npx_start() 
 { 
   pixels.begin(); // INITIALIZE NeoPixel strip object (REQUIRED)
@@ -129,6 +134,16 @@ void setup()
     shiftout_light(0, 2,spaceR, spaceG, spaceB); // zwei rote für start
     delay(500); // wait a while
 
+  // Ausgabe der Programmversion und des Build-Datums
+  Serial.println("-------------------------------");
+  Serial.print("Rheinturmuhr-ESP Multi ");
+  Serial.println("-------------------------------");
+  Serial.print("Programmversion: ");
+  Serial.print(PROGRAM_VERSION);
+  Serial.print("\t Build-Datum: ");
+  Serial.println(BUILD_DATE);
+  delay(500); // wait a while
+
   WiFiManager wm;
   bool res;
   res = wm.autoConnect(apSsid, apPwd); // password protected ap
@@ -153,6 +168,7 @@ void setup()
   
   delay(1000); // wait a while
   Serial.println("NTP Zeit empfangen");
+  delay(1000); // wait a while
   time(&now);             // Liest die aktuelle Zeit
   localtime_r(&now, &tm); // Beschreibt tm mit der aktuelle Zeit
   Serial.print(wochentage[tm.tm_wday]);
@@ -163,6 +179,7 @@ void setup()
   Serial.print(tm.tm_year + 1900);
 
   Serial.printf(" \tUhrzeit: %02d:%02d:%02d \n", tm.tm_hour, tm.tm_min, tm.tm_sec);
+  delay(1000); // wait a while
   
 }
 
