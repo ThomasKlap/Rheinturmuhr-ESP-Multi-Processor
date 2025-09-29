@@ -23,10 +23,6 @@ void shiftout_bits (int startpos, int bits, int value, int color_red, int color_
 { for (int i = 0; i < bits; i++) // Hauptschleifenzähler, Anzahl der auszugebenden Bits
   { if (value > i) //Wert ist größer als Schleifenzähler
     { 
-      #ifdef FIRE
-      color_red = random(cnt_rf_min, cnt_rf_max); // Feuerflackern
-      color_green = 30;
-      #endif
       pixels.setPixelColor(startpos + i, pixels.Color(color_red, color_green, color_blue)); //send Bit out
       //pixels.show(); // This sends the updated pixel color to the hardware.
       //delay(delayval); // Delay for a period of time (in milliseconds).
@@ -38,7 +34,7 @@ void shiftout_bits (int startpos, int bits, int value, int color_red, int color_
     }
     yield(); // Gebe dem System Zeit für Hintergrundaufgaben
   }
-  pixels.show();
+  // pixels.show();
   return; // Funtion wieder verlassen
 }
 
@@ -56,7 +52,7 @@ unsigned long currentMillis = millis(); // Aktuelle Zeit wird in currentMillis g
       shiftout_light (startpos, bits, color_red/2, color_green/2, color_blue/2);
      RestMillis = currentMillis;} // Zeitpunkt der letzten Schaltung wird festgehalten 
     
-  pixels.show();   // Send the updated pixel colors to the hardware.
+  // pixels.show();   // Send the updated pixel colors to the hardware.
 }
 
 // Funktion zur Anzeige der Positionslichter
@@ -75,7 +71,7 @@ unsigned long currentMillis = millis(); // Aktuelle Zeit wird in currentMillis g
       
      PosMillis = currentMillis;} // Zeitpunkt der letzten Schaltung wird festgehalten 
     
-  pixels.show();   // Send the updated pixel colors to the hardware.
+  // pixels.show();   // Send the updated pixel colors to the hardware.
 }
 
 // Funktion zur Ausgabe der gesamten Anzeige zum Turm
@@ -120,6 +116,7 @@ void show_out(int sec, int min, int hrs)
   rest_light(62,18,restR, restG, restB); // Restaurantbeleuchtung
   
   pos_light (75,8,restR, restG, restB); 
+  pixels.show();
 }
 
 
@@ -172,7 +169,7 @@ void setup()
 void loop()
 {
 
-  delay(100);
+  delay(200);
   /* Zykluszeit messen
   CycleMillis = millis();
   
