@@ -3,7 +3,7 @@
 Lichtzeitpegel ist die Bezeichnung der Uhrenlichtskulptur des Künstlers Horst H. Baumann am Düsseldorfer Rheinturm. Sie wurde am 24. November 1981 in Betrieb genommen und ist gemäß dem Guinness-Buch der Rekorde die größte dezimale „Zeitskala“ der Welt. Die Uhr wird auch als Dezimaluhr bezeichnet, obwohl der „Lichtzeitpegel“ die klassische 24-Stunden-Uhrzeit anzeigt und die Ziffern im Unärsystem dargestellt werden.  
 [Quelle: Wikipedia, [Lichtzeitpegel]( de.wikipedia.org/wiki/Lichtzeitpegel )] 
 
-![Bild](https://github.com/ThomasKlap/Rheinturmuhr-ESP8266-ESP32/blob/doc/Rheinturm_v19.png)
+![Bild](https://github.com/ThomasKlap/Rheinturmuhr-ESP-Multi-Processor/blob/main/doc/Rheinturm_v19.png)
 
 Die Bauteile, als .stl Files für den 3D Druck, liegen im Ordner Parts.  
 Ich habe den Turm schon mehrfach in unterschiedlichen Farben PLA gedruckt.
@@ -18,10 +18,10 @@ Die Positionsleuchten ringsum sind für 2mm Leds vorgesehen, welche dort eingekl
 Ich verwende für die Projekte einen Wemos D1mini mit ESP8266 Prozessor.  
 Für den Anschluss wird ein 470 Ohm Widerstand empfohlen, um die Neopixel vor Spannungsspitzen zu schützen.
 
-![Schaltplan](https://github.com/ThomasKlap/Rheinturmuhr-ESP8266-ESP32/blob/doc/Wiring_MultiProcessorjpg.jpg)
+![Schaltplan](https://github.com/ThomasKlap/Rheinturmuhr-ESP-Multi-Processor/blob/main/doc/Wiring_MultiProcessorjpg.jpg)
 
 Das Programm ist für einen Wemos D1 Mini kompiliert und kann aus dem Browser [Google Chrome oder Microsoft Edge] mittels ESP-WebTools installiert werden.  
-[Link zu Web-Installation, mit ESP Web-Tools]( https://thomasklap.github.io/Rheinturmuhr-Multi/flash.html )
+[Link zu Web-Installation, mit ESP Web-Tools]( https://github.com/ThomasKlap/Rheinturmuhr-ESP-Multi-Processor/blob/main/flash.html )
 
 Nach der Installation ist die Uhr als WLAN-Hotspot [Rheintrumuhr-VX_xxxx] verfügbar.  
 Mit dem Kennwort [123456789] kann man sich mit Hotspot verbinden. Dann im Browser über die Adresse 192.168.4.1 des Parametermenue aufrufen und die lokalen WLAN Zugangsdaten eingeben. Ab dann bezieht die Uhr Ihrer Zeit selbständig via WLAN vom NTP Server [de.pool.ntp.org] 
