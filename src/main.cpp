@@ -18,7 +18,7 @@ void npx_start()
 void shiftout_light (int startpos, int bits, int color_red, int color_green, int color_blue)   // Parameter übernehmen
 { for (int i = 0; i < bits; i++) {
     pixels.setPixelColor(startpos + i, pixels.Color(color_red, color_green, color_blue));
-    pixels.show(); // This sends the updated pixel color to the hardware.
+    //pixels.show(); // This sends the updated pixel color to the hardware.
     yield(); // Gebe dem System Zeit für Hintergrundaufgaben
   }
 }
@@ -40,7 +40,7 @@ void shiftout_bits (int startpos, int bits, int value, int color_red, int color_
     yield(); // Gebe dem System Zeit für Hintergrundaufgaben
   }
   // pixels.show();
-  return; // Funtion wieder verlassen
+  //return; // Funtion wieder verlassen
 }
 
 
@@ -69,10 +69,12 @@ unsigned long currentMillis = millis(); // Aktuelle Zeit wird in currentMillis g
       shiftout_light (startpos, bits, color_red, color_green, color_blue);
       digitalWrite(PosLedPin, HIGH); 
       
+      
   }
   if (currentMillis - PosMillis >= intervalPosMillis*2) { // Falls mehr als 1000 ms vergangen sind
       shiftout_light (startpos, bits, 0, 0, 0);
       digitalWrite(PosLedPin, LOW); 
+      
       
      PosMillis = currentMillis;} // Zeitpunkt der letzten Schaltung wird festgehalten 
     
@@ -128,6 +130,7 @@ void show_out(int sec, int min, int hrs)
 void setup()
 {
   pinMode(PosLedPin, OUTPUT); // Setzt den Digitalpin als Outputpin
+  
   Serial.begin(115200);
   delay(1000); // wait a while
   npx_start(); // Start Routine für die Neopixel
@@ -135,18 +138,27 @@ void setup()
     delay(500); // wait a while
 
   // Ausgabe der Programmversion und des Build-Datums
+  Serial.println(" ");
   Serial.println("-------------------------------");
-  Serial.print("Rheinturmuhr-ESP Multi ");
+  Serial.println("Rheinturmuhr-ESP Multiprocessor ");
   Serial.println("-------------------------------");
+  Serial.println(" ");
   Serial.print("Programmversion: ");
   Serial.print(PROGRAM_VERSION);
   Serial.print("\t Build-Datum: ");
   Serial.println(BUILD_DATE);
+  Serial.print("MAC-Adresse: ");
+  Serial.println(WiFi.macAddress());
+  Serial.print("Saved-WLAN SSID: ");
+  Serial.println(WiFi.SSID());
+  Serial.print("Saved-WLAN Passwort: ");
+  Serial.println(WiFi.psk());
   delay(500); // wait a while
 
   WiFiManager wm;
   bool res;
-  res = wm.autoConnect(apSsid, apPwd); // password protected ap
+  //res = wm.autoConnect("Turmuhr" PROGRAM_VERSION, apPwd); // password protected ap
+  res = wm.autoConnect(apSsid, apPwd); // password protected ap --- IGNORE ---
   if (!res)
   {
     Serial.println("Failed to connect");
@@ -180,7 +192,6 @@ void setup()
 
   Serial.printf(" \tUhrzeit: %02d:%02d:%02d \n", tm.tm_hour, tm.tm_min, tm.tm_sec);
   delay(1000); // wait a while
-  
 }
 
 void loop()
@@ -202,6 +213,6 @@ void loop()
   time(&now);             // Liest die aktuelle Zeit
   localtime_r(&now, &tm); // Beschreibt tm mit der aktuelle Zeit
   show_out(tm.tm_sec, tm.tm_min, tm.tm_hour); // send lights to the NPX Stripe  
-
-
 }
+
+// Ende main.cpp

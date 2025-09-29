@@ -4,7 +4,7 @@
 #include <Adafruit_NeoPixel.h>
 
 
-const char *apSsid = "Rheinturm-V7-0-1"; // SSID for AP if WLAN failed and first setup
+const char *apSsid = "RheinturmuhrV7"; // SSID for AP if WLAN failed ; replaced with PROGRAM_VERSION
 const char *apPwd = "123456789"; // SSID for AP if WLAN failed and first setup
 
 
