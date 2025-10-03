@@ -135,6 +135,7 @@ void setup()
   delay(1000); // wait a while
   npx_start(); // Start Routine für die Neopixel
     shiftout_light(0, 2,spaceR, spaceG, spaceB); // zwei rote für start
+    pixels.show();
     delay(500); // wait a while
 
   // Ausgabe der Programmversion und des Build-Datums
@@ -163,21 +164,23 @@ void setup()
   {
     Serial.println("Failed to connect");
     // ESP.restart();
-    shiftout_light(2, 2,spaceR, spaceG, spaceB); // zwei rote für start
+    shiftout_light(0, 4,spaceR, spaceG, spaceB); // vier rote für start
+    pixels.show();
     delay(500); // wait a wihle
   }
   else
   {
     // if you get here you have connected to the WiFi
     Serial.println("connected...yeey :)");
-    shiftout_light(0, 4,spaceR, spaceG, spaceB); // vier rote OK
+    shiftout_light(0, 6,spaceR, spaceG, spaceB); // sechs rote OK
+    pixels.show();
     delay(500); // wait a wihle
   }
 
   configTime(0, 0, NTP_SERVER);
   setenv("TZ", TZ_INFO, 1);
   shiftout_light(0, 6,spaceR, spaceG, spaceB); // sechs rote für start fertig
-  
+  pixels.show();
   delay(1000); // wait a while
   Serial.println("NTP Zeit empfangen");
   delay(1000); // wait a while
@@ -191,7 +194,9 @@ void setup()
   Serial.print(tm.tm_year + 1900);
 
   Serial.printf(" \tUhrzeit: %02d:%02d:%02d \n", tm.tm_hour, tm.tm_min, tm.tm_sec);
-  delay(1000); // wait a while
+    shiftout_light(0, 8,spaceR, spaceG, spaceB); // acht rote für start fertig
+    pixels.show();
+    delay(1000); // wait a while
 }
 
 void loop()
@@ -209,9 +214,10 @@ void loop()
   */ // Zykluszeit messen Ende
 
 
-  
+  delay(100);
   time(&now);             // Liest die aktuelle Zeit
   localtime_r(&now, &tm); // Beschreibt tm mit der aktuelle Zeit
+  delay(100);
   show_out(tm.tm_sec, tm.tm_min, tm.tm_hour); // send lights to the NPX Stripe  
 }
 
